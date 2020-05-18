@@ -1,0 +1,16 @@
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_OUT = 'SIGN_OUT';
+export const CREATE_DIRECTORIES = 'CREATE_DIRECTORIES';
+export const CREATE_NOTE = 'CREATE_NOTE';
+export const EDIT_DIRECTORY = 'EDIT_DIRECTORY';
+export const DELETE_DIRECTORY = 'DELETE_DIRECTORY';
+export const FETCH_DIRECTORIES = 'FETCH_DIRECTORIES';
+export const FETCH_DIRECTORY = 'FETCH_DIRECTORY';
+export const EDIT_NOTE = 'EDIT_NOTE';
+export const DELETE_NOTE = 'DELETE_NOTE';
+export const FETCH_NOTES = 'FETCH_NOTES';
+export const FETCH_NOTE = 'FETCH_NOTE';
+export const DIRECTORY_SELECTED = 'DIRECTORY_SELECTED';
+export const NOTE_SELECTED = 'NOTE_SELECTED';
+export const DND_NOTE = 'DND_NOTE';
+
