@@ -5,6 +5,7 @@ import directoryReducer from './directoryReducer';
 import notesReducer from './notesReducer';
 import { selectedDirectoryReducer } from './selectedDirectoryReducer';
 import { selectedNoteReducer } from './selectedNoteReducer';
+import {openedDirectoriesReducer} from "./openedDirectoriesReducer";
 
 export default combineReducers({
         auth: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
         directories: directoryReducer,
         notes: notesReducer,
     selectedDirectory: selectedDirectoryReducer,
-    selectedNote: selectedNoteReducer
-    });
+    selectedNote: selectedNoteReducer,
+    openedDirectories: openedDirectoriesReducer
+});

@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DirectoryItem from "./DirectoryItem";
-import { selectedDirectory, editDirectory, fetchDirectories, fetchNotes } from "../actions";
+import { selectedDirectory, editDirectory, fetchDirectories, fetchNotes, toggleDirectory } from "../actions";
+import _ from 'lodash'
 
 class DirectoriesList extends React.Component{
     constructor(props){
@@ -29,21 +30,10 @@ class DirectoriesList extends React.Component{
                 index={index}
                 handleFocusOut={this.handleFocusOut}
                 selectedDirectory={this.props.selectedDirectory}
+                toggleDirectory={this.props.toggleDirectory}
+                opened={_.includes(this.props.openedDirectories, directory.id)}
             />
-            )
-        // return this.props.directories.map(directory =>{
-        //     return(
-        //         <div className="item" key={directory.id}>
-        //             <Link to={`/directories/${directory.id}`}>
-        //                 <i onClick={() => this.props.selectedDirectory(directory)} className="folder icon" />
-        //             </Link>
-        //                 <EditableLabel
-        //                     text={`${directory.attributes.title}`}
-        //                     onFocusOut={(text) => this.handleFocusOut(text)}
-        //                     />
-        //         </div>
-        //     )
-        // })
+        )
     };
 
     render() {
@@ -58,8 +48,9 @@ class DirectoriesList extends React.Component{
 const mapStateToProps = (state) => {
     return {
         directories: Object.values(state.directories),
-        directory: state.selectedDirectory
+        directory: state.selectedDirectory,
+        openedDirectories: state.openedDirectories
     }
 };
 
-export default connect(mapStateToProps, {fetchDirectories, fetchNotes, selectedDirectory, editDirectory})(DirectoriesList);
+export default connect(mapStateToProps, {fetchDirectories, fetchNotes, selectedDirectory, editDirectory, toggleDirectory})(DirectoriesList);

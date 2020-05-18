@@ -13,4 +13,4 @@ export const FETCH_NOTE = 'FETCH_NOTE';
 export const DIRECTORY_SELECTED = 'DIRECTORY_SELECTED';
 export const NOTE_SELECTED = 'NOTE_SELECTED';
 export const DND_NOTE = 'DND_NOTE';
-
+export const TOGGLE_DIRECTORY = 'TOGGLE_DIRECTORY';

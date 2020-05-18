@@ -16,7 +16,8 @@ import {
     DELETE_NOTE,
     DND_NOTE,
     DIRECTORY_SELECTED,
-    NOTE_SELECTED
+    NOTE_SELECTED,
+    TOGGLE_DIRECTORY
 } from './types';
 
 export const signIn = (resp) => async dispatch => {
@@ -96,14 +97,14 @@ export const fetchNote = () => async (dispatch, getState) => {
 
 export const selectedDirectory = directory => {
     return {
-        type: 'DIRECTORY_SELECTED',
+        type: DIRECTORY_SELECTED,
         payload: directory
     };
 };
 
 export const selectedNote = note => {
     return {
-        type: 'NOTE_SELECTED',
+        type: NOTE_SELECTED,
         payload: note
     };
 };
@@ -140,6 +141,13 @@ export const dndNote = () => async (dispatch, getState) => {
     const response = await directories.patch(`/directories/${getState().selectedDirectory.id}/notes/${id}`, { data: { attributes: { position: position}}}, { headers: { Authorization: `Bearer ${accessToken}` } });
 
     dispatch({ type: DND_NOTE, payload: response.data});
+};
+
+export const toggleDirectory = directoryId => {
+    return {
+        type: TOGGLE_DIRECTORY,
+        payload: directoryId
+    }
 };
 
 
