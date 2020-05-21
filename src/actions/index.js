@@ -17,7 +17,7 @@ import {
     DND_NOTE,
     DIRECTORY_SELECTED,
     NOTE_SELECTED,
-    TOGGLE_DIRECTORY
+    TOGGLE_DIRECTORY, SEARCH_NOTE
 } from './types';
 
 export const signIn = (resp) => async dispatch => {
@@ -66,9 +66,10 @@ export const deleteDirectory = () => async (dispatch, getState) => {
     history.push('/');
 };
 
-export const createDirectory = formValues => async (dispatch, getState) =>{
+export const createDirectory = (formValues) => async (dispatch, getState) =>{
+    const { id } = getState().selectedDirectory;
     const { accessToken } = getState().auth;
-    const response = await directories.post('/directories', { data: { attributes: { ...formValues}}}, { headers: { Authorization: `Bearer ${accessToken}` } });
+    const response = await directories.post('/directories', { data: { attributes: { ...formValues, parent_directory_id: id}}}, { headers: { Authorization: `Bearer ${accessToken}` } });
 
     dispatch({ type: CREATE_DIRECTORIES, payload: response.data });
     history.push('/');
@@ -147,6 +148,13 @@ export const toggleDirectory = directoryId => {
     return {
         type: TOGGLE_DIRECTORY,
         payload: directoryId
+    }
+};
+
+export const searchNote = search => {
+    return {
+        type: SEARCH_NOTE,
+        payload: search
     }
 };
 

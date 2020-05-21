@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
             return note.relationships.directory.data.id === state.selectedDirectory.id
         }),
         directory: state.selectedDirectory,
-        note: state.selectedNote
+        note: state.selectedNote,
     }
 };
 

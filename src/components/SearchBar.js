@@ -1,33 +1,32 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import {connect} from "react-redux";
+import {searchNote} from "../actions";
 
 class SearchBar extends React.Component {
-    renderInput({ input }) {
-        return (
-        <div className="ui icon input">
-            <input
-                {...input}
-                type="text"
-                placeholder="Search..."
-            />
-            <i className="search icon"></i>
-        </div>
-        );
-    }
-
-    onSubmit(formValues) {
-    }
-
     render() {
+
         return (
-            <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <Field name="search" component={this.renderInput}/>
-            </form>
+            <div className="ui icon input">
+                <form className="ui form">
+                    <div className="filed">
+                        <label>search</label>
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            value={this.props.search}
+                            onChange={e => this.props.searchNote(e.target.value)}
+                        />
+                        <i className="search icon"></i>
+                    </div>
+                </form>
+            </div>
         );
     }
 }
 
-export default reduxForm({
-    form: 'searchBar',
-    fields: ['search']
-})(SearchBar);
+const mapStateToProps = (state) => {
+    return { search: state.search }
+};
+
+export default connect(mapStateToProps, {searchNote})(SearchBar);
+
