@@ -38,7 +38,7 @@ class DirectoriesList extends React.Component{
 
     render() {
         return (
-            <div>
+            <div className="ui list">
                 <div >{this.props.directories.map((directory, i) => this.renderList(directory, i))}</div>
             </div>
         //{this.renderList()}

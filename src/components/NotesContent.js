@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchNotes, selectedDirectory, selectedNote, editNote} from '../actions';
+import { fetchNotes, selectedDirectory, selectedNote, editNote, dndNote} from '../actions';
 import {DndProvider} from "react-dnd";
 import Backend from "react-dnd-html5-backend";
 import NoteList from "./NoteList";
@@ -17,6 +17,10 @@ class NotesContent extends React.Component {
         this.props.editNote(this.props.directory.id, id, text);
     };
 
+    onChangePosition = (notes) => {
+        this.props.dndNote(notes);
+    }
+
     renderList() {
         if (this.props.notes === undefined || this.props.notes.length === 0) {
             return (
@@ -25,7 +29,7 @@ class NotesContent extends React.Component {
         }
         return (
             <DndProvider backend={Backend}>
-                <NoteList selectedNote={this.props.selectedNote} handleFocusOut={this.handleFocusOut}/>
+                <NoteList selectedNote={this.props.selectedNote} handleFocusOut={this.handleFocusOut} onChangePosition={this.onChangePosition}/>
             </DndProvider>
         )
 
@@ -46,4 +50,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, { fetchNotes, selectedDirectory, selectedNote, editNote })(NotesContent);
+export default connect(mapStateToProps, { fetchNotes, selectedDirectory, selectedNote, editNote, dndNote })(NotesContent);

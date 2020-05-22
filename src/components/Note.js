@@ -9,7 +9,7 @@ const style = {
     backgroundColor: 'white',
     cursor: 'move',
 };
-const Note = ({ note, directoryId, index, moveNote, handleFocusOut, selectedNote }) => {
+const Note = ({ note, directoryId, index, moveNote, handleFocusOut, selectedNote, onChangePosition, notes }) => {
     const id = note.id;
     const ref = useRef(null)
     const [, drop] = useDrop({
@@ -52,6 +52,9 @@ const Note = ({ note, directoryId, index, moveNote, handleFocusOut, selectedNote
             // to avoid expensive index searches.
             item.index = hoverIndex
         },
+        drop(item, monitor) {
+            onChangePosition(notes)
+        }
     });
     const [{ isDragging }, drag] = useDrag({
         item: { type: ItemTypes.NOTE, id, index },

@@ -135,11 +135,12 @@ export const deleteNote = () => async (dispatch, getState) => {
     history.push(`/directories/${id}`);
 };
 
-export const dndNote = () => async (dispatch, getState) => {
-    const { id } = getState().selectedNote;
-    const { position } = getState().selectedNote;
+export const dndNote = (orderedNotes) => async (dispatch, getState) => {
+    const { id } = getState().selectedDirectory;
+    const orderedNotesIds = orderedNotes.map((note) => note.id)
     const { accessToken } = getState().auth;
-    const response = await directories.patch(`/directories/${getState().selectedDirectory.id}/notes/${id}`, { data: { attributes: { position: position}}}, { headers: { Authorization: `Bearer ${accessToken}` } });
+    console.log(orderedNotesIds)
+    const response = await directories.patch(`/directories/${id}/update_notes_positions`, { data: { orderedNotes: orderedNotesIds}}, { headers: { Authorization: `Bearer ${accessToken}` } });
 
     dispatch({ type: DND_NOTE, payload: response.data});
 };

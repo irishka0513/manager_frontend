@@ -8,15 +8,17 @@ class SearchBar extends React.Component {
         return (
             <div className="ui icon input">
                 <form className="ui form">
-                    <div className="filed">
-                        <label>search</label>
+                    <div className="filed" style={{width: "100%", marginBottom: "10px"}}>
+                        <i className="search icon" style={{position: "absolute", padding: "10px", textAlign: "center", color: "grey" }}></i>
                         <input
+                            className="input-field"
+                            style={{width: "100%", paddingLeft: "25px", borderRadius: "50px" }}
                             type="text"
-                            placeholder="Search..."
+                            placeholder="search..."
                             value={this.props.search}
                             onChange={e => this.props.searchNote(e.target.value)}
                         />
-                        <i className="search icon"></i>
+
                     </div>
                 </form>
             </div>

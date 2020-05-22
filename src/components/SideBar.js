@@ -6,7 +6,7 @@ import DeleteItem from "./sideBar/DeleteItem";
 class SideBar extends React.Component {
     render() {
         return (
-            <div className="ui list">
+            <div className="ui list" style={{textAlign: "center"}}>
                 <AddDirectoryItem />
                 <AddNoteItem />
                 <DeleteItem />

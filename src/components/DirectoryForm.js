@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {Link} from "react-router-dom";
+import EditableLabel from "react-inline-editing";
 
 class DirectoryForm extends React.Component {
     renderError({ error, touched }) {

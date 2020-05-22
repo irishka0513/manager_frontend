@@ -14,7 +14,7 @@ export default (state = {}, action) => {
         case CREATE_NOTE:
             return { ...state, [action.payload.data.id]: action.payload.data};
         case DND_NOTE:
-            return { ...state, [action.payload.data.id]: action.payload.data};
+            return { ...state, ..._.mapKeys(action.payload.data, 'id')};
         default:
             return state;
     }

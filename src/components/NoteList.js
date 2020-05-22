@@ -6,12 +6,12 @@ import update from 'immutability-helper';
 const style = {
     width: 400,
 };
-const Container = ({ handleFocusOut, selectedNote }) => {
+const Container = ({ handleFocusOut, selectedNote, onChangePosition }) => {
     {
         const selectedDirectory = useSelector(state => state.selectedDirectory);
         const search = useSelector(state => state.search);
         const allNotes = Object.values(useSelector(state => state.notes));
-        const directoryNotes = allNotes.filter((note) => {
+        let directoryNotes = allNotes.filter((note) => {
             let matchSearch = true;
             const directoryNote = note.relationships.directory.data.id === selectedDirectory.id;
             if(search.length > 0) {
@@ -19,15 +19,14 @@ const Container = ({ handleFocusOut, selectedNote }) => {
             }
             return directoryNote && matchSearch;
         });
-        //_.sortBy(directoryNotes, ['type', 'position']);
-        console.log(directoryNotes.length)
+        console.log(directoryNotes);
+        directoryNotes = _.sortBy(directoryNotes, [(note) => note.attributes.position]);
         useEffect(() => {
             if(directoryNotes) {
                 setNotes(directoryNotes);
             }
         }, [selectedDirectory.id, search]); // listen only to currentChannelName changes
         const [notes, setNotes] = useState(directoryNotes);
-        console.log(notes);
 
         const moveNote = useCallback(
             (dragIndex, hoverIndex) => {
@@ -52,7 +51,9 @@ const Container = ({ handleFocusOut, selectedNote }) => {
                     note={note}
                     moveNote={moveNote}
                     handleFocusOut={handleFocusOut}
+                    onChangePosition={onChangePosition}
                     directoryId={selectedDirectory.id}
+                    notes={notes}
                 />
             )
         };

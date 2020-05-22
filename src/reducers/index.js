@@ -16,5 +16,5 @@ export default combineReducers({
     selectedDirectory: selectedDirectoryReducer,
     selectedNote: selectedNoteReducer,
     openedDirectories: openedDirectoriesReducer,
-    search: searchReducer
+    search: searchReducer,
 });

@@ -28,7 +28,6 @@ const mapStateToProps = (state, ownProps) => {
     return {
         note: state.notes[ownProps.match.params.id],
         selectedNote: state.selectedNote,
-        formValues: state.form
     };
 };
 
