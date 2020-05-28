@@ -24,6 +24,7 @@ class DirectoriesList extends React.Component{
         if (this.props.directories === undefined || this.props.directories.length === 0) {
             return <div>Loading...</div>
         }
+        if(directory === null) return null;
         return (
             <DirectoryItem
                 directory={directory}
@@ -32,6 +33,7 @@ class DirectoriesList extends React.Component{
                 selectedDirectory={this.props.selectedDirectory}
                 toggleDirectory={this.props.toggleDirectory}
                 opened={_.includes(this.props.openedDirectories, directory.id)}
+                openedDirectories={this.props.openedDirectories}
             />
         )
     };
@@ -41,13 +43,32 @@ class DirectoriesList extends React.Component{
             <div className="ui list">
                 <div >{this.props.directories.map((directory, i) => this.renderList(directory, i))}</div>
             </div>
-        //{this.renderList()}
         );
     }
 }
+
+const directoriesTree = (allDirectories) => {
+    if(allDirectories.length === 0) return [];
+
+    allDirectories = allDirectories.map((dir) => { return { ...dir, children: [] }});
+
+    const tree = allDirectories.map((directory) => {
+        if(directory.attributes.parent_directory_id) {
+            let parentDirectory = allDirectories.find((dir) => dir.id === directory.attributes.parent_directory_id.toString());
+            parentDirectory.children.push(directory);
+            return null;
+        } else {
+            return directory;
+        }
+    });
+    console.log(tree);
+    return tree;
+
+};
+
 const mapStateToProps = (state) => {
     return {
-        directories: Object.values(state.directories),
+        directories: directoriesTree(Object.values(state.directories)),
         directory: state.selectedDirectory,
         openedDirectories: state.openedDirectories
     }

@@ -18,7 +18,6 @@ class SearchBar extends React.Component {
                             value={this.props.search}
                             onChange={e => this.props.searchNote(e.target.value)}
                         />
-
                     </div>
                 </form>
             </div>

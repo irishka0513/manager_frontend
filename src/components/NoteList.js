@@ -15,17 +15,16 @@ const Container = ({ handleFocusOut, selectedNote, onChangePosition }) => {
             let matchSearch = true;
             const directoryNote = note.relationships.directory.data.id === selectedDirectory.id;
             if(search.length > 0) {
-                matchSearch = note.attributes.title.search(search) !== -1;
+                matchSearch = note.attributes.title.toLowerCase().search(search.toLowerCase()) !== -1;
             }
             return directoryNote && matchSearch;
         });
-        console.log(directoryNotes);
         directoryNotes = _.sortBy(directoryNotes, [(note) => note.attributes.position]);
         useEffect(() => {
             if(directoryNotes) {
                 setNotes(directoryNotes);
             }
-        }, [selectedDirectory.id, search]); // listen only to currentChannelName changes
+        }, [selectedDirectory.id, search]);
         const [notes, setNotes] = useState(directoryNotes);
 
         const moveNote = useCallback(
